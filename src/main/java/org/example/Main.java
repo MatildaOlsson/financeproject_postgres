@@ -1,17 +1,32 @@
 package org.example;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        String connectionString = "jdbc:postgresql://localhost/personalfinance?user=postgres&password=mysecretpassword";
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection(connectionString);
+            System.out.println("You're connected to the database!");
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+try {
+    Statement createTableStatement = connection.createStatement();
+    createTableStatement.execute("CREATE TABLE transactions1 (id SERIAL PRIMARY KEY, amount INT)");
+} catch (SQLException e) {
+    e.printStackTrace();
+    return;
+}
+
     }
 }
