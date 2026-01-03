@@ -1,8 +1,10 @@
 package personalfinance.models;
 
-public class Transactions {
-    protected double sum;
-    protected String type;
+import java.math.BigDecimal;
+
+public class Transaction {
+    protected BigDecimal amount;
+    protected boolean isIncome;
     protected String currency;
     protected String transactionInfo;
 
@@ -11,9 +13,9 @@ public class Transactions {
     protected String year;
     protected String week;
 
-    public Transactions(double sum, String type, String currency, String year, String month, String day, String week) {
-        this.sum = sum;
-        this.type = type;
+    public Transaction(BigDecimal sum, Boolean isIncome, String currency, String year, String month, String day, String week) {
+        this.amount = sum;
+        this.isIncome = isIncome;
         this.currency = currency;
         this.year = year;
         this.month = month;
@@ -21,17 +23,22 @@ public class Transactions {
         this.week = week;
     }
 
-    public double getSum() {
-        return sum;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public boolean getIsIncome(){
+        return isIncome;
     }
 
     public String getDay() {
         return day;
     }
+
 
     public String getYear() {
         return year;
@@ -51,7 +58,7 @@ public class Transactions {
 
     @Override
     public String toString() {
-        return sum +
+        return amount +
                 " " + currency +
                 ", Type: '" + type + '\'' +
                 ", Date: " + day + "/" + month + "/" + year +
