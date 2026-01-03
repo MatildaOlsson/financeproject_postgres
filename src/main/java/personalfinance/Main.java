@@ -2,6 +2,9 @@ package personalfinance;
 
 //import personalfinance.repositories.PostgresTransactionRepository;
 
+import personalfinance.commands.RegisterTransactionCommand;
+import personalfinance.services.TransactionService;
+
 import java.sql.*;
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -11,8 +14,15 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        LocalDate today = LocalDate.now();
-        System.out.println(today);
+        RegisterTransactionCommand income = new RegisterTransactionCommand(true);
+        RegisterTransactionCommand expense = new RegisterTransactionCommand(false);
+        TransactionService service = new TransactionService();
+
+        service.saveTransaction();
+
+//        income.registerTransaction();
+//        expense.registerTransaction();
+
 
 
 //        try {
