@@ -40,7 +40,7 @@ public class PostgresTransactionRepository {
             System.out.println("Success!!");
 
             if (saveStatement.executeUpdate() != 1) {
-                throw new SQLException("Failed to insert user");
+                throw new SQLException("Failed to insert transaction");
             }
 
         }
