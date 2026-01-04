@@ -1,11 +1,10 @@
 package personalfinance.commands;
 
-import personalfinance.models.Transaction;
 import personalfinance.services.TransactionService;
 
 import java.math.BigDecimal;
 
-public class ViewAccountBalanceCommand extends Command{
+public class ViewAccountBalanceCommand extends Command {
 
     TransactionService transactionService = new TransactionService();
 

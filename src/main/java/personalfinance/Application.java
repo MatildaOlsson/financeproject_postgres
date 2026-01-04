@@ -38,8 +38,7 @@ public class Application {
             try {
                 int choice = scan.nextInt();
 
-                if (choice == 0)
-                    return;
+                if (choice == 0) return;
                 else {
                     int index = choice - 1;
                     terminalCommandService.executeCommand(index, commandoList);

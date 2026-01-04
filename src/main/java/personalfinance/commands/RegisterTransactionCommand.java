@@ -4,13 +4,12 @@ import personalfinance.models.Transaction;
 import personalfinance.services.TransactionService;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.Scanner;
 
-public class RegisterTransactionCommand extends Command{
+public class RegisterTransactionCommand extends Command {
     TransactionService transactionService = new TransactionService();
 
     Scanner scan = new Scanner(System.in);
@@ -42,9 +41,4 @@ public class RegisterTransactionCommand extends Command{
 
         transactionService.saveTransaction(transaction);
     }
-
-
-
-
-
 }

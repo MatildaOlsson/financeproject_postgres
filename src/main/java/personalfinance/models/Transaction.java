@@ -1,8 +1,6 @@
 package personalfinance.models;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
@@ -16,11 +14,6 @@ public class Transaction {
 
     protected char plusMinus;
 
-//    protected String day;
-//    protected String month;
-//    protected String year;
-//    protected String week;
-
     public Transaction(int id, BigDecimal sum, Boolean isIncome, String currency, Date date, int week, String trancastionInfo) {
         this.id = id;
         this.amount = sum;
@@ -32,8 +25,7 @@ public class Transaction {
 
         if (isIncome) {
             this.plusMinus = '+';
-        }
-        else if (!isIncome) {
+        } else if (!isIncome) {
             this.plusMinus = '-';
         }
 
@@ -47,47 +39,35 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public boolean getIsIncome() { return isIncome; }
+    public boolean getIsIncome() {
+        return isIncome;
+    }
 
-    public String getCurrency() {return currency; }
+    public String getCurrency() {
+        return currency;
+    }
 
-    public Integer getWeek() {return week;}
+    public Integer getWeek() {
+        return week;
+    }
 
-    public String getTrancastionInfo() {return transactionInfo;}
-
-
-
-    public Date getDate() {return date;}
-
-
-
-//    public String getDay() {
-//        return day;
-//    }
-//
-//
-//    public String getYear() {
-//        return year;
-//    }
-//
-//    public String getMonth() {
-//        return month;
-//    }
-//
-//    public String getWeek() {
-//        return week;
-//    }
+    public String getTrancastionInfo() {
+        return transactionInfo;
+    }
 
 
+    public Date getDate() {
+        return date;
+    }
 
     @Override
     public String toString() {
         return
-                "id: " + id  + ", "+ plusMinus  + amount +
-                " " + currency +
-                ", Info: " + transactionInfo +
-                ", Date: " + date + '\'' +
-                ", Week: " + week + "\n";
+                "id: " + id + ", " + plusMinus + amount +
+                        " " + currency +
+                        ", Info: " + transactionInfo +
+                        ", Date: " + date + '\'' +
+                        ", Week: " + week + "\n";
     }
 }
 

@@ -10,7 +10,7 @@ public class SeeAllHistoryCommand extends Command {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         service.seeAllTransaction();
     }
 }

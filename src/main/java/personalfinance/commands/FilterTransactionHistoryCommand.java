@@ -26,7 +26,7 @@ public class FilterTransactionHistoryCommand extends Command {
             System.out.println("Wrong input");
         }
         System.out.println("Type the number of your " + type);
-        try{
+        try {
             value = scan.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Wrong input");
@@ -37,9 +37,5 @@ public class FilterTransactionHistoryCommand extends Command {
         for (Transaction t : transactionList) {
             System.out.println("Transaction: " + t);
         }
-
-
-
-
     }
 }

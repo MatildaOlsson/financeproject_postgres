@@ -16,7 +16,10 @@ public class TransactionService {
 
     public TransactionService() {
         try {
-            transactionRepository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance", "postgres", "mysecretpassword");
+            String url = "jdbc:postgresql://localhost/personalfinance";
+            String userName = "postgres";
+            String password = "password";
+            transactionRepository = new PostgresTransactionRepository(url, userName, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

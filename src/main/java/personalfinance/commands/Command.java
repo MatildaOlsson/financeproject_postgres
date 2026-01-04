@@ -18,5 +18,3 @@ public abstract class Command {
         return name;
     }
 }
-
-
