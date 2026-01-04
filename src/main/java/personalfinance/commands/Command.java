@@ -7,9 +7,7 @@ public abstract class Command {
         this.name = name;
     }
 
-    public void execute() {
-
-    }
+    public abstract void execute();
 }
 
 

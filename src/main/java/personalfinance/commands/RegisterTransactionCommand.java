@@ -21,7 +21,7 @@ public class RegisterTransactionCommand extends Command{
         this.isIncome = isIncome;
     }
 
-
+    @Override
     public void execute() {
         System.out.println("Enter the amount:");
         BigDecimal amount = scan.nextBigDecimal();

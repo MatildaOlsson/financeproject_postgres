@@ -4,6 +4,7 @@ package personalfinance;
 
 import personalfinance.commands.DeleteTransactionCommand;
 import personalfinance.commands.RegisterTransactionCommand;
+import personalfinance.commands.SeeHistoryCommand;
 import personalfinance.models.Transaction;
 import personalfinance.repositories.PostgresTransactionRepository;
 import personalfinance.services.TransactionService;
@@ -21,20 +22,38 @@ public class Main {
         RegisterTransactionCommand incomeRegCommand = new RegisterTransactionCommand(true);
         RegisterTransactionCommand expenseRegCommand = new RegisterTransactionCommand(false);
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand();
+        SeeHistoryCommand seeHistoryCommand = new SeeHistoryCommand();
         TransactionService service = new TransactionService();
-        PostgresTransactionRepository repository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance","postgres","mysecretpassword");
-
+        PostgresTransactionRepository repository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance", "postgres", "mysecretpassword");
 
 
 //        List<Transaction> transactions = repository.getAll();
 //        System.out.println(transactions);
 //
 //        repository.deleteTransactionById(2);
-
+//while (true) {
+//    Scanner scan = new Scanner(System.in);
+//    int choice = scan.nextInt();
+//
+//    switch (choice) {
+//        case 1: incomeRegCommand.execute();
+//        break;
+//        case 2: expenseRegCommand.execute();
+//        break;
+//        case 3: deleteTransactionCommand.execute();
+//        break;
+//        case 4: seeHistoryCommand.execute();
+//        break;
+//        case 5:
+//            return;
+//    }
         incomeRegCommand.execute();
         expenseRegCommand.execute();
         deleteTransactionCommand.execute();
+        seeHistoryCommand.execute();
         service.seeTransactionList();
+    }
+}
 
 
 
@@ -90,5 +109,3 @@ public class Main {
 
 
 
-    }
-}

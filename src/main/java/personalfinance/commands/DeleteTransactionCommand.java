@@ -18,8 +18,9 @@ public class DeleteTransactionCommand extends Command {
         Scanner scan = new Scanner(System.in);
         System.out.println("Type id for the transaction you want to delete:");
         int id = scan.nextInt();
+        scan.nextLine();
 
         service.DeleteTransactionById(id);
-        System.out.println("Transaction hs been deleted");
+        System.out.println("Transaction id: " + id + " has been deleted");
     }
 }
