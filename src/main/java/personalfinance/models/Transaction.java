@@ -6,25 +6,27 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
+    protected int id;
     protected BigDecimal amount;
     protected boolean isIncome;
     protected String currency;
-
-
-    protected LocalDate date;
+    protected Date date;
     protected int week;
+    protected String transactionInfo;
 
 //    protected String day;
 //    protected String month;
 //    protected String year;
 //    protected String week;
 
-    public Transaction(BigDecimal sum, Boolean isIncome, String currency, LocalDate date, int week) {
+    public Transaction(int id, BigDecimal sum, Boolean isIncome, String currency, Date date, int week, String trancastionInfo) {
+        this.id = id;
         this.amount = sum;
         this.isIncome = isIncome;
         this.currency = currency;
         this.date = date;
         this.week = week;
+        this.transactionInfo = trancastionInfo;
     }
 
     public BigDecimal getAmount() {
@@ -41,12 +43,11 @@ public class Transaction {
 
     public Integer getWeek() {return week;}
 
-    public Date convertDateToSql(LocalDate date) {
-        return java.sql.Timestamp.valueOf(date.atStartOfDay());
-    }
+    public String getTrancastionInfo() {return transactionInfo;}
 
 
-    public LocalDate getDate() {return date;}
+
+    public Date getDate() {return date;}
 
 
 
@@ -71,11 +72,12 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return amount +
+        return
+                "id: " + id  + " " +  amount +
                 " " + currency +
-                ", isIncome: '" + isIncome + '\'' +
+                ", Info: " + transactionInfo +
                 ", Date: " + date + '\'' +
-                ", Week: " + week;
+                ", Week: " + week + "\n";
     }
 }
 

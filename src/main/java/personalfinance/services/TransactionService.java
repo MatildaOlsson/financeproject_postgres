@@ -5,11 +5,12 @@ import personalfinance.models.Transaction;
 import personalfinance.repositories.PostgresTransactionRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TransactionService {
 
     private PostgresTransactionRepository transactionRepository;
-    private RegisterTransactionCommand income = new RegisterTransactionCommand(true);
+
 
     public TransactionService() {
         try {
@@ -19,14 +20,27 @@ public class TransactionService {
         }
     }
 
-    public void saveTransaction() {
-        Transaction tran = income.registerTransaction();
-        try {transactionRepository.save(tran);}
+    public void saveTransaction(Transaction transaction) {
+        try {transactionRepository.save(transaction);}
         catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
-
+    }
+    public void seeTransactionList() {
+        try {
+            List<Transaction> transactions =  transactionRepository.getAll();
+            System.out.println(transactions);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void DeleteTransactionById(int id) {
+        try {
+            transactionRepository.deleteTransactionById(id);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }

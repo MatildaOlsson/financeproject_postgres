@@ -2,23 +2,41 @@ package personalfinance;
 
 //import personalfinance.repositories.PostgresTransactionRepository;
 
+import personalfinance.commands.DeleteTransactionCommand;
 import personalfinance.commands.RegisterTransactionCommand;
+import personalfinance.models.Transaction;
+import personalfinance.repositories.PostgresTransactionRepository;
 import personalfinance.services.TransactionService;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        RegisterTransactionCommand income = new RegisterTransactionCommand(true);
-        RegisterTransactionCommand expense = new RegisterTransactionCommand(false);
+        RegisterTransactionCommand incomeRegCommand = new RegisterTransactionCommand(true);
+        RegisterTransactionCommand expenseRegCommand = new RegisterTransactionCommand(false);
+        DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand();
         TransactionService service = new TransactionService();
+        PostgresTransactionRepository repository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance","postgres","mysecretpassword");
 
-        service.saveTransaction();
+
+
+//        List<Transaction> transactions = repository.getAll();
+//        System.out.println(transactions);
+//
+//        repository.deleteTransactionById(2);
+
+        incomeRegCommand.execute();
+        expenseRegCommand.execute();
+        deleteTransactionCommand.execute();
+        service.seeTransactionList();
+
+
 
 //        income.registerTransaction();
 //        expense.registerTransaction();
