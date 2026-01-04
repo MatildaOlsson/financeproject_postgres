@@ -5,6 +5,7 @@ package personalfinance;
 import personalfinance.commands.DeleteTransactionCommand;
 import personalfinance.commands.RegisterTransactionCommand;
 import personalfinance.commands.SeeHistoryCommand;
+import personalfinance.commands.ViewAccountBalanceCommand;
 import personalfinance.models.Transaction;
 import personalfinance.repositories.PostgresTransactionRepository;
 import personalfinance.services.TransactionService;
@@ -23,6 +24,7 @@ public class Main {
         RegisterTransactionCommand expenseRegCommand = new RegisterTransactionCommand(false);
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand();
         SeeHistoryCommand seeHistoryCommand = new SeeHistoryCommand();
+        ViewAccountBalanceCommand viewAccountBalanceCommand = new ViewAccountBalanceCommand();
         TransactionService service = new TransactionService();
         PostgresTransactionRepository repository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance", "postgres", "mysecretpassword");
 
@@ -51,7 +53,9 @@ public class Main {
         expenseRegCommand.execute();
         deleteTransactionCommand.execute();
         seeHistoryCommand.execute();
+        viewAccountBalanceCommand.execute();
         service.seeTransactionList();
+
     }
 }
 

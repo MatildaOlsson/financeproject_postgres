@@ -86,4 +86,39 @@ public class PostgresTransactionRepository {
 
         }
     }
+    public BigDecimal getSum (boolean isIncome) throws SQLException {
+        String sql = "SELECT SUM(amount) FROM " +
+                tableName + " WHERE is_income = ?";
+        BigDecimal sum;
+
+        try(PreparedStatement sumStatement = connection.prepareStatement(sql)) {   sumStatement.setBoolean(1, isIncome);
+            ResultSet resultSet = sumStatement.executeQuery();
+            resultSet.next();
+
+             sum = resultSet.getBigDecimal(1);
+
+             if (sum == null) {
+                 System.out.println("Found null");
+             }
+    }
+        return sum;
+}
+public String getCurrency (int id) throws SQLException {
+        String sql = "SELECT currency FROM " +
+                tableName + " WHERE id = ?";
+        String currency;
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+
+            currency = resultSet.getString("currency");
+
+            if (!resultSet.next()) {
+                System.out.println("No transaction with that id found");
+            }
+        }
+        return currency;
+}
+
 }

@@ -4,6 +4,7 @@ import personalfinance.commands.RegisterTransactionCommand;
 import personalfinance.models.Transaction;
 import personalfinance.repositories.PostgresTransactionRepository;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -36,11 +37,30 @@ public class TransactionService {
     }
     public void DeleteTransactionById(int id) {
         try {
-            transactionRepository.deleteTransactionById(id);
+            transactionRepository.deleteTransactionById(id); //BORDE kanaske vara "found transaction by id"
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public BigDecimal getTransactionSum(boolean isIncome) {
+        BigDecimal sum = null;
+        try {
+           sum = transactionRepository.getSum(isIncome);
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        return sum;
+    }
+    public String getTransactionCurrency (int id) {
+        String currency = "";
+        try{
+            currency =transactionRepository.getCurrency(id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return currency;
 
     }
 }
