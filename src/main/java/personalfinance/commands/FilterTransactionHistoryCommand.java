@@ -19,7 +19,7 @@ public class FilterTransactionHistoryCommand extends Command {
         Scanner scan = new Scanner(System.in);
         String type = "";
         int value = 0;
-        System.out.println("Type year/month/day to filter your transactions");
+        System.out.println("Write year, month or day to filter your transactions");
         try {
             type = scan.nextLine();
         } catch (InputMismatchException e) {

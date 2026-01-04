@@ -8,6 +8,20 @@ import personalfinance.services.TransactionService;
 
 import java.sql.*;
 
+///
+/// add income
+/// add expense
+/// see all transactions
+/// quit application
+/// delete transaction
+/// filter transaction
+/// account balance
+///
+/// left-overs:
+/// currency problem
+///
+
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {

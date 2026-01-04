@@ -17,10 +17,10 @@ public class ViewAccountBalanceCommand extends Command{
     public void execute() {
         BigDecimal totalIncome = transactionService.getTransactionSum(true);
         BigDecimal totalExpense = transactionService.getTransactionSum(false);
-        String currency = transactionService.getTransactionCurrency(1);
+//        String currency = transactionService.getTransactionCurrency(1);
 
         BigDecimal accountBalance = totalIncome.subtract(totalExpense);
-        System.out.println("Your current account balance: " + accountBalance + " " + currency);
+        System.out.println("Your current account balance: " + accountBalance + " "); //TODO use pre-set currency
     }
 
 }
