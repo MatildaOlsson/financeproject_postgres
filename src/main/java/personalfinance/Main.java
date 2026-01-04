@@ -49,12 +49,14 @@ public class Main {
 //        case 5:
 //            return;
 //    }
-        incomeRegCommand.execute();
-        expenseRegCommand.execute();
-        deleteTransactionCommand.execute();
-        seeHistoryCommand.execute();
-        viewAccountBalanceCommand.execute();
-        service.seeTransactionList();
+        List<Transaction> transaction = repository.filterByYearMonthOrDay(,"month");
+        System.out.println(transaction);
+//        incomeRegCommand.execute();
+//        expenseRegCommand.execute();
+//        deleteTransactionCommand.execute();
+//        seeHistoryCommand.execute();
+//        viewAccountBalanceCommand.execute();
+
 
     }
 }

@@ -5,13 +5,14 @@ import personalfinance.models.Transaction;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 
 public class PostgresTransactionRepository {
 
     private Connection connection;
-    protected String tableName = "transactionTableExmample";
+    protected String tableName = "transactionTableExmample2";
 
     public PostgresTransactionRepository (String tableName) {
         this.tableName = tableName;
@@ -56,8 +57,8 @@ public class PostgresTransactionRepository {
     public List<Transaction> getAll() throws SQLException {
         String sql = "SELECT * FROM " + tableName;
         List <Transaction> transactionList = new ArrayList<>();
-        try (PreparedStatement getAllStatement = connection.prepareStatement(sql)) {
-            ResultSet resultSet = getAllStatement.executeQuery();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -76,15 +77,54 @@ public class PostgresTransactionRepository {
     public void deleteTransactionById (int id) throws SQLException {
         String sql = "DELETE FROM " + tableName +
                 " WHERE id = ?";
-        try(PreparedStatement deleteStatement = connection.prepareStatement(sql)) {
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            deleteStatement.setInt(1,id);
+            statement.setInt(1,id);
 
-            if (deleteStatement.executeUpdate() != 1) {
+            if (statement.executeUpdate() != 1) {
                 throw new SQLException("Failed to delete transaction");
             }
 
         }
+    }
+    private String validateSql(String type) {
+        if (type.equalsIgnoreCase("year")) {
+            return "YEAR";
+        } else if (type.equalsIgnoreCase("month")) {
+            return "MONTH";
+        } else if (type.equalsIgnoreCase("day")) {
+            return "DAY";
+        } else {
+            throw new InputMismatchException("WRONG INPUT! TYPE MUST BE YEAR, MONTH OR DAY");
+        }
+    }
+
+    public List<Transaction> filterByYearMonthOrDay(int value, String type) throws SQLException {
+        String sqlType = validateSql(type); //A validated SQL kod to avoid SQL-injection and secure right format.
+        List <Transaction> transactionList = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName +
+                " WHERE EXTRACT( " + sqlType + " FROM date) = ? ;";
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, value);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                BigDecimal amount = resultSet.getBigDecimal("amount");
+                String currency = resultSet.getString("currency");
+                boolean isIncome = resultSet.getBoolean("is_income");
+                Date date = resultSet.getDate("date");
+                int week = resultSet.getInt("week");
+                String transactionInfo = resultSet.getString("transaction_info");
+                Transaction transaction = new Transaction(id, amount, isIncome, currency, date, week, transactionInfo);
+                transactionList.add(transaction);
+            }
+            return transactionList;
+
+        }
+
+
     }
     public BigDecimal getSum (boolean isIncome) throws SQLException {
         String sql = "SELECT SUM(amount) FROM " +

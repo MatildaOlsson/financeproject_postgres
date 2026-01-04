@@ -14,6 +14,8 @@ public class Transaction {
     protected int week;
     protected String transactionInfo;
 
+    protected char plusMinus;
+
 //    protected String day;
 //    protected String month;
 //    protected String year;
@@ -27,6 +29,14 @@ public class Transaction {
         this.date = date;
         this.week = week;
         this.transactionInfo = trancastionInfo;
+
+        if (isIncome) {
+            this.plusMinus = '+';
+        }
+        else if (!isIncome) {
+            this.plusMinus = '-';
+        }
+
     }
 
     public BigDecimal getAmount() {
@@ -73,7 +83,7 @@ public class Transaction {
     @Override
     public String toString() {
         return
-                "id: " + id  + " " +  amount +
+                "id: " + id  + ", "+ plusMinus  + amount +
                 " " + currency +
                 ", Info: " + transactionInfo +
                 ", Date: " + date + '\'' +

@@ -30,7 +30,11 @@ public class TransactionService {
     public void seeTransactionList() {
         try {
             List<Transaction> transactions =  transactionRepository.getAll();
-            System.out.println(transactions);
+            System.out.println("Your transactions: ");
+            for (Transaction t : transactions) {
+                System.out.println("Transaction: " + t);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
