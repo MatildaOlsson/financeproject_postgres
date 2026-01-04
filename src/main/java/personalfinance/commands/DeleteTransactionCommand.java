@@ -14,7 +14,7 @@ public class DeleteTransactionCommand extends Command {
     }
     @Override
     public void execute() {
-        service.seeTransactionList();
+        service.seeAllTransaction();
         Scanner scan = new Scanner(System.in);
         System.out.println("Type id for the transaction you want to delete:");
         int id = scan.nextInt();

@@ -8,6 +8,15 @@ public abstract class Command {
     }
 
     public abstract void execute();
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
 

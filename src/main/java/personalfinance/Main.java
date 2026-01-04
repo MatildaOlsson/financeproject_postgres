@@ -2,32 +2,26 @@ package personalfinance;
 
 //import personalfinance.repositories.PostgresTransactionRepository;
 
-import personalfinance.commands.DeleteTransactionCommand;
-import personalfinance.commands.RegisterTransactionCommand;
-import personalfinance.commands.SeeHistoryCommand;
-import personalfinance.commands.ViewAccountBalanceCommand;
-import personalfinance.models.Transaction;
+import personalfinance.commands.*;
 import personalfinance.repositories.PostgresTransactionRepository;
 import personalfinance.services.TransactionService;
 
 import java.sql.*;
-import java.util.List;
-import java.util.Scanner;
-import java.time.LocalDate;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        RegisterTransactionCommand incomeRegCommand = new RegisterTransactionCommand(true);
-        RegisterTransactionCommand expenseRegCommand = new RegisterTransactionCommand(false);
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand();
-        SeeHistoryCommand seeHistoryCommand = new SeeHistoryCommand();
+        SeeAllHistoryCommand seeHistoryCommand = new SeeAllHistoryCommand();
         ViewAccountBalanceCommand viewAccountBalanceCommand = new ViewAccountBalanceCommand();
+        FilterTransactionHistoryCommand filterTransactionHistoryCommand = new FilterTransactionHistoryCommand();
         TransactionService service = new TransactionService();
         PostgresTransactionRepository repository = new PostgresTransactionRepository("jdbc:postgresql://localhost/personalfinance", "postgres", "mysecretpassword");
 
+        Application app = new Application();
+        app.start();
 
 //        List<Transaction> transactions = repository.getAll();
 //        System.out.println(transactions);
@@ -49,13 +43,13 @@ public class Main {
 //        case 5:
 //            return;
 //    }
-        List<Transaction> transaction = repository.filterByYearMonthOrDay(,"month");
-        System.out.println(transaction);
+
 //        incomeRegCommand.execute();
 //        expenseRegCommand.execute();
 //        deleteTransactionCommand.execute();
 //        seeHistoryCommand.execute();
 //        viewAccountBalanceCommand.execute();
+//          filterTransactionHistoryCommand.execute();
 
 
     }

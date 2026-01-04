@@ -6,6 +6,7 @@ import personalfinance.repositories.PostgresTransactionRepository;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionService {
@@ -22,44 +23,47 @@ public class TransactionService {
     }
 
     public void saveTransaction(Transaction transaction) {
-        try {transactionRepository.save(transaction);}
-        catch (Exception e) {
+        try {
+            transactionRepository.save(transaction);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void seeTransactionList() {
+
+    public void seeAllTransaction() {
         try {
-            List<Transaction> transactions =  transactionRepository.getAll();
+            List<Transaction> transactions = transactionRepository.getAll();
             System.out.println("Your transactions: ");
             for (Transaction t : transactions) {
                 System.out.println("Transaction: " + t);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void DeleteTransactionById(int id) {
         try {
-            transactionRepository.deleteTransactionById(id); //BORDE kanaske vara "found transaction by id"
-        }
-        catch (SQLException e) {
+            transactionRepository.deleteTransactionById(id);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public BigDecimal getTransactionSum(boolean isIncome) {
         BigDecimal sum = null;
         try {
-           sum = transactionRepository.getSum(isIncome);
+            sum = transactionRepository.getSum(isIncome);
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return sum;
     }
-    public String getTransactionCurrency (int id) {
+
+    public String getTransactionCurrency(int id) {
         String currency = "";
-        try{
-            currency =transactionRepository.getCurrency(id);
+        try {
+            currency = transactionRepository.getCurrency(id);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,6 +71,18 @@ public class TransactionService {
         return currency;
 
     }
+
+    public List<Transaction> getFiltredList(String type, int value) {
+        List<Transaction> transactionList = new ArrayList<>();
+        try {
+            transactionList = transactionRepository.filterByYearMonthOrDay(value, type);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactionList;
+    }
 }
+
+
 
 

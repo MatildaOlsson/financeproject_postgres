@@ -16,8 +16,8 @@ public class RegisterTransactionCommand extends Command{
     Scanner scan = new Scanner(System.in);
     Boolean isIncome;
 
-    public RegisterTransactionCommand(Boolean isIncome) {
-        super("Register transaction command");
+    public RegisterTransactionCommand(Boolean isIncome, String type) {
+        super("Register " + type + " command");
         this.isIncome = isIncome;
     }
 
